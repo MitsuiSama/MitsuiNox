@@ -13,6 +13,7 @@ using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using NetDevPack.Mediator;
+using ViaCepService;
 
 namespace Equinox.Infra.CrossCutting.IoC
 {
@@ -25,6 +26,7 @@ namespace Equinox.Infra.CrossCutting.IoC
 
             // Application
             services.AddScoped<ICustomerAppService, CustomerAppService>();
+            services.AddScoped<IConsultaCepAppService, ConsultaCepAppService>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<CustomerRegisteredEvent>, CustomerEventHandler>();
@@ -44,6 +46,9 @@ namespace Equinox.Infra.CrossCutting.IoC
             services.AddScoped<IEventStoreRepository, EventStoreSqlRepository>();
             services.AddScoped<IEventStore, SqlEventStore>();
             services.AddScoped<EventStoreSqlContext>();
+
+            // Infra - Services 
+            services.AddScoped<ICepService, ViaCep>();
         }
     }
 }
